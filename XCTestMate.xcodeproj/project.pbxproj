@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		916DAAA618EE591E00448620 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 916DAAA518EE591E00448620 /* CoreServices.framework */; };
 		91B45A6718EAC27F00BE4BA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B45A6618EAC27F00BE4BA1 /* Foundation.framework */; };
 		91B45A6A18EAC27F00BE4BA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B45A6918EAC27F00BE4BA1 /* main.m */; };
 		91B45A6E18EAC27F00BE4BA1 /* XCTestMate.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 91B45A6D18EAC27F00BE4BA1 /* XCTestMate.1 */; };
@@ -26,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		916DAAA518EE591E00448620 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		91B45A6318EAC27F00BE4BA1 /* XCTestMate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCTestMate; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B45A6618EAC27F00BE4BA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		91B45A6918EAC27F00BE4BA1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -38,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				916DAAA618EE591E00448620 /* CoreServices.framework in Frameworks */,
 				91B45A6718EAC27F00BE4BA1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +68,7 @@
 		91B45A6518EAC27F00BE4BA1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				916DAAA518EE591E00448620 /* CoreServices.framework */,
 				91B45A6618EAC27F00BE4BA1 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -253,6 +257,7 @@
 				91B45A7318EAC27F00BE4BA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

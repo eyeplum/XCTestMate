@@ -6,25 +6,24 @@
 //  Copyright (c) 2014 eyeplum. All rights reserved.
 //
 
-#import <sys/event.h>
-
 
 static NSString * const kSchemeArgName = @"-scheme";
-static NSString * schemeName;
 
-static void SocketCallback (
-        CFSocketRef socketRef,
-        CFSocketCallBackType callBackType,
-        CFDataRef address,
-        const void * data,
-        void * info);
+static void kFSEventCallback(ConstFSEventStreamRef streamRef,
+                           void *clientCallBackInfo,
+                           size_t numEvents,
+                           void *eventPaths,
+                           const FSEventStreamEventFlags eventFlags[],
+                           const FSEventStreamEventId eventIds[]);
 
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
 
-        NSArray *args = [[NSProcessInfo processInfo] arguments];
+        NSString *watchPath = [[NSFileManager defaultManager] currentDirectoryPath];
 
+        NSString *schemeName;
+        NSArray *args = [[NSProcessInfo processInfo] arguments];
         BOOL isArgsValid = NO;
         if (args.count > 2) {
             if ([args[1] isEqualToString:kSchemeArgName]) {
@@ -37,41 +36,19 @@ int main(int argc, const char * argv[]) {
             printf("Usage: testmate -scheme YOUR_SCHEME\n");
             return 0;
         }
-
-        NSString *dirName = [[NSFileManager defaultManager] currentDirectoryPath];
-
-        int queue = kqueue();
-        int dirFD = open(dirName.fileSystemRepresentation, O_RDONLY);
-
-        struct kevent event;
-        EV_SET(
-        &event,
-        dirFD,
-        EVFILT_VNODE,
-        EV_ADD | EV_CLEAR | EV_ENABLE,
-        NOTE_WRITE,
-        0,
-        (__bridge_retained void *)dirName);
-
-        kevent(queue, &event, 1, NULL, 0, NULL);
-
-        CFSocketContext context = { 0, (void *)&queue, NULL, NULL, NULL};
-
-        CFSocketRef socket = CFSocketCreateWithNative(
-                kCFAllocatorDefault,
-                queue,
-                kCFSocketReadCallBack,
-                SocketCallback,
-                &context);
-
-        CFRunLoopSourceRef runLoopSource = CFSocketCreateRunLoopSource(
-                kCFAllocatorDefault,
-                socket,
-                0);
-
-        CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, kCFRunLoopDefaultMode);
-        CFRelease(runLoopSource);
-
+        
+        FSEventStreamContext context = {0, (__bridge void *)schemeName, NULL, NULL, NULL};
+        FSEventStreamRef eventStream = FSEventStreamCreate(kCFAllocatorDefault,
+                                                           &kFSEventCallback,
+                                                           &context,
+                                                           (__bridge CFArrayRef) @[watchPath],
+                                                           kFSEventStreamEventIdSinceNow,
+                                                           0.0,
+                                                           kFSEventStreamCreateFlagNone);
+        
+        FSEventStreamScheduleWithRunLoop(eventStream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+        FSEventStreamStart(eventStream);
+        
         [[NSRunLoop currentRunLoop] run];
 
     }
@@ -79,17 +56,13 @@ int main(int argc, const char * argv[]) {
 }
 
 
-static void SocketCallback(
-        CFSocketRef socketRef,
-        CFSocketCallBackType callBackType,
-        CFDataRef address,
-        const void * data,
-        void * info) {
-
-    int queue = *(int *)info;
-
-    struct kevent event;
-    kevent(queue, NULL, 0, &event, 1, NULL);
-
+static void kFSEventCallback(ConstFSEventStreamRef streamRef,
+                             void *clientCallBackInfo,
+                             size_t numEvents,
+                             void *eventPaths,
+                             const FSEventStreamEventFlags eventFlags[],
+                             const FSEventStreamEventId eventIds[]) {
+    
+    NSString *schemeName = (__bridge NSString *)clientCallBackInfo;
     NSLog(@"xcodebuild test -scheme %@", schemeName);
 }
