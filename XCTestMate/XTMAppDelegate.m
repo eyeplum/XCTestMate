@@ -51,7 +51,7 @@ static void kFSEventCallback(ConstFSEventStreamRef streamRef,
                                                        (__bridge CFArrayRef) @[watchPath],
                                                        kFSEventStreamEventIdSinceNow,
                                                        0.0,
-                                                       kFSEventStreamCreateFlagNone);
+                                                       kFSEventStreamCreateFlagUseCFTypes);
     
     FSEventStreamScheduleWithRunLoop(eventStream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     FSEventStreamStart(eventStream);
@@ -66,11 +66,12 @@ static void kFSEventCallback(ConstFSEventStreamRef streamRef,
                              const FSEventStreamEventId eventIds[]) {
     
     XTMAppDelegate *appDelegate = (__bridge XTMAppDelegate *) clientCallBackInfo;
-    [appDelegate handleFileStreamEvent];
+    [appDelegate handleFileStreamEventWithPaths:(__bridge NSArray *) ((CFArrayRef) eventPaths)];
 }
 
 
-- (void)handleFileStreamEvent {
+- (void)handleFileStreamEventWithPaths:(NSArray *)paths {
+    NSLog(@"%@", paths);
     system([self.testCommand UTF8String]);
 }
 
