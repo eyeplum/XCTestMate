@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		916DAAA618EE591E00448620 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 916DAAA518EE591E00448620 /* CoreServices.framework */; };
+		916DAAA918EE920100448620 /* XTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 916DAAA818EE920100448620 /* XTMAppDelegate.m */; };
 		91B45A6718EAC27F00BE4BA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B45A6618EAC27F00BE4BA1 /* Foundation.framework */; };
 		91B45A6A18EAC27F00BE4BA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B45A6918EAC27F00BE4BA1 /* main.m */; };
 		91B45A6E18EAC27F00BE4BA1 /* XCTestMate.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 91B45A6D18EAC27F00BE4BA1 /* XCTestMate.1 */; };
@@ -28,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		916DAAA518EE591E00448620 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		916DAAA718EE920100448620 /* XTMAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTMAppDelegate.h; sourceTree = "<group>"; };
+		916DAAA818EE920100448620 /* XTMAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTMAppDelegate.m; sourceTree = "<group>"; };
 		91B45A6318EAC27F00BE4BA1 /* XCTestMate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCTestMate; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B45A6618EAC27F00BE4BA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		91B45A6918EAC27F00BE4BA1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -78,6 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				91B45A6918EAC27F00BE4BA1 /* main.m */,
+				916DAAA718EE920100448620 /* XTMAppDelegate.h */,
+				916DAAA818EE920100448620 /* XTMAppDelegate.m */,
 				91B45A6D18EAC27F00BE4BA1 /* XCTestMate.1 */,
 				91B45A6B18EAC27F00BE4BA1 /* Supporting Files */,
 			);
@@ -143,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				916DAAA918EE920100448620 /* XTMAppDelegate.m in Sources */,
 				91B45A6A18EAC27F00BE4BA1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
